@@ -15,7 +15,7 @@ namespace eBookSaleProject.Controllers
         public IActionResult Index()
         {
             var data = appDbContext.Authors.ToList();
-            return View();
+            return View(data);
         }
     }
 }

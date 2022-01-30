@@ -17,7 +17,7 @@ namespace eBookSaleProject.Controllers
         public async Task<IActionResult> Index()
         {
             var allBooks = await appDbContext.Books.ToListAsync();
-            return View();
+            return View(allBooks);
         }
     }
 }

@@ -25,31 +25,31 @@ namespace eBookSaleProject.Data
                         new Author()
                         {
                             FullName = "Author1",
-                            ProfilePictureURL ="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fblue-cube&psig=AOvVaw0jmQXcqsgvRsrJko2peQe3&ust=1643409264615000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJCSt93-0vUCFQAAAAAdAAAAABAI" ,
+                            ProfilePictureURL ="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg" ,
                             Biography = " This is a biography of Author 1"
                         },
                          new Author()
                         {
                             FullName = "Author2",
-                            ProfilePictureURL ="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fblue-cube&psig=AOvVaw0jmQXcqsgvRsrJko2peQe3&ust=1643409264615000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJCSt93-0vUCFQAAAAAdAAAAABAI" ,
+                            ProfilePictureURL ="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg" ,
                             Biography = " This is a biography of Author 2"
                         },
                           new Author()
                         {
                             FullName = "Author3",
-                            ProfilePictureURL ="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fblue-cube&psig=AOvVaw0jmQXcqsgvRsrJko2peQe3&ust=1643409264615000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJCSt93-0vUCFQAAAAAdAAAAABAI" ,
+                            ProfilePictureURL ="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg" ,
                             Biography = " This is a biography of Author 3"
                         },
                            new Author()
                         {
                             FullName = "Author4",
-                            ProfilePictureURL ="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fblue-cube&psig=AOvVaw0jmQXcqsgvRsrJko2peQe3&ust=1643409264615000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJCSt93-0vUCFQAAAAAdAAAAABAI" ,
+                            ProfilePictureURL ="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg" ,
                             Biography = " This is a biography of Author 4"
                         },
                          new Author()
                         {
                             FullName = "Author 5",
-                            ProfilePictureURL ="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fblue-cube&psig=AOvVaw0jmQXcqsgvRsrJko2peQe3&ust=1643409264615000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJCSt93-0vUCFQAAAAAdAAAAABAI" ,
+                            ProfilePictureURL ="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg" ,
                             Biography = " This is a biography of Author 5"
                         }
 
@@ -66,8 +66,8 @@ namespace eBookSaleProject.Data
                             Name ="BookName1",
                             Description ="Book_1 Description",
                             Price = 12.40,
-                            ImageUrl ="https://www.google.com/url?sa=i&url=https%3A%2F%2Fdictionary.cambridge.org%2Fru%2F%25D1%2581%25D0%25BB%25D0%25BE%25D0%25B2%25D0%25B0%25D1%2580%25D1%258C%2F%25D0%25B0%25D0%25BD%25D0%25B3%25D0%25BB%25D0%25B8%25D0%25B9%25D1%2581%25D0%25BA%25D0%25B8%25D0%25B9%2Fbook&psig=AOvVaw10RFKo0N0WVGfeCBySGDUh&ust=1643412365581000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCOCq7aaK0_UCFQAAAAAdAAAAABAD",
-                            BookFileUrl ="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freeiconspng.com%2Fimg%2F6838&psig=AOvVaw1tbLRdhbNu4J2Q24V413qi&ust=1643412413334000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCIigxryK0_UCFQAAAAAdAAAAABAJ",
+                            ImageUrl ="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
+                            BookFileUrl ="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
                             EdititonDate = DateTime.Now.AddDays(-7),
                             BookCategory = BookCategory.Childrens,
                             PublisherId =1
@@ -77,8 +77,8 @@ namespace eBookSaleProject.Data
                             Name ="BookName2",
                             Description ="Book_2 Description",
                             Price = 14.70,
-                            ImageUrl ="https://www.google.com/url?sa=i&url=https%3A%2F%2Fdictionary.cambridge.org%2Fru%2F%25D1%2581%25D0%25BB%25D0%25BE%25D0%25B2%25D0%25B0%25D1%2580%25D1%258C%2F%25D0%25B0%25D0%25BD%25D0%25B3%25D0%25BB%25D0%25B8%25D0%25B9%25D1%2581%25D0%25BA%25D0%25B8%25D0%25B9%2Fbook&psig=AOvVaw10RFKo0N0WVGfeCBySGDUh&ust=1643412365581000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCOCq7aaK0_UCFQAAAAAdAAAAABAD",
-                            BookFileUrl ="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freeiconspng.com%2Fimg%2F6838&psig=AOvVaw1tbLRdhbNu4J2Q24V413qi&ust=1643412413334000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCIigxryK0_UCFQAAAAAdAAAAABAJ",
+                            ImageUrl ="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
+                            BookFileUrl ="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
                             EdititonDate = DateTime.Now.AddDays(-4),
                             BookCategory = BookCategory.Crime,
                             PublisherId = 2
@@ -88,8 +88,8 @@ namespace eBookSaleProject.Data
                             Name ="BookName3",
                             Description ="Book_3 Description",
                             Price = 44.40,
-                            ImageUrl ="https://www.google.com/url?sa=i&url=https%3A%2F%2Fdictionary.cambridge.org%2Fru%2F%25D1%2581%25D0%25BB%25D0%25BE%25D0%25B2%25D0%25B0%25D1%2580%25D1%258C%2F%25D0%25B0%25D0%25BD%25D0%25B3%25D0%25BB%25D0%25B8%25D0%25B9%25D1%2581%25D0%25BA%25D0%25B8%25D0%25B9%2Fbook&psig=AOvVaw10RFKo0N0WVGfeCBySGDUh&ust=1643412365581000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCOCq7aaK0_UCFQAAAAAdAAAAABAD",
-                            BookFileUrl ="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freeiconspng.com%2Fimg%2F6838&psig=AOvVaw1tbLRdhbNu4J2Q24V413qi&ust=1643412413334000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCIigxryK0_UCFQAAAAAdAAAAABAJ",
+                            ImageUrl ="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
+                            BookFileUrl ="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
                             EdititonDate = DateTime.Now.AddDays(-1),
                             BookCategory = BookCategory.Fantasy,
                             PublisherId =3
@@ -99,8 +99,8 @@ namespace eBookSaleProject.Data
                             Name ="BookName4",
                             Description ="Book_4 Description",
                             Price = 12.40,
-                            ImageUrl ="https://www.google.com/url?sa=i&url=https%3A%2F%2Fdictionary.cambridge.org%2Fru%2F%25D1%2581%25D0%25BB%25D0%25BE%25D0%25B2%25D0%25B0%25D1%2580%25D1%258C%2F%25D0%25B0%25D0%25BD%25D0%25B3%25D0%25BB%25D0%25B8%25D0%25B9%25D1%2581%25D0%25BA%25D0%25B8%25D0%25B9%2Fbook&psig=AOvVaw10RFKo0N0WVGfeCBySGDUh&ust=1643412365581000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCOCq7aaK0_UCFQAAAAAdAAAAABAD",
-                            BookFileUrl ="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freeiconspng.com%2Fimg%2F6838&psig=AOvVaw1tbLRdhbNu4J2Q24V413qi&ust=1643412413334000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCIigxryK0_UCFQAAAAAdAAAAABAJ",
+                            ImageUrl ="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
+                            BookFileUrl ="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
                             EdititonDate = DateTime.Now.AddDays(-9),
                             BookCategory = BookCategory.Fantasy,
                             PublisherId =3
@@ -110,8 +110,8 @@ namespace eBookSaleProject.Data
                             Name ="BookName5",
                             Description ="Book_5 Description",
                             Price = 66.40,
-                            ImageUrl ="https://www.google.com/url?sa=i&url=https%3A%2F%2Fdictionary.cambridge.org%2Fru%2F%25D1%2581%25D0%25BB%25D0%25BE%25D0%25B2%25D0%25B0%25D1%2580%25D1%258C%2F%25D0%25B0%25D0%25BD%25D0%25B3%25D0%25BB%25D0%25B8%25D0%25B9%25D1%2581%25D0%25BA%25D0%25B8%25D0%25B9%2Fbook&psig=AOvVaw10RFKo0N0WVGfeCBySGDUh&ust=1643412365581000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCOCq7aaK0_UCFQAAAAAdAAAAABAD",
-                            BookFileUrl ="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freeiconspng.com%2Fimg%2F6838&psig=AOvVaw1tbLRdhbNu4J2Q24V413qi&ust=1643412413334000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCIigxryK0_UCFQAAAAAdAAAAABAJ",
+                            ImageUrl ="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
+                            BookFileUrl ="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
                             EdititonDate = DateTime.Now.AddDays(-5),
                             BookCategory = BookCategory.Guide,
                             PublisherId = 2 
@@ -127,25 +127,25 @@ namespace eBookSaleProject.Data
                         new Publisher()
                         {
                             Name ="Publisher1",
-                            Logo ="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.seroundtable.com%2Fseo-link-building-time-survey-32641.html&psig=AOvVaw0jmQXcqsgvRsrJko2peQe3&ust=1643409264615000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJCSt93-0vUCFQAAAAAdAAAAABAO",
+                            Logo ="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
                             Description ="This is the description of Publisher 1"
                         },
                         new Publisher()
                         {
                             Name ="Publisher2",
-                            Logo ="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.seroundtable.com%2Fseo-link-building-time-survey-32641.html&psig=AOvVaw0jmQXcqsgvRsrJko2peQe3&ust=1643409264615000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJCSt93-0vUCFQAAAAAdAAAAABAO",
+                            Logo ="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
                             Description ="This is the description of Publisher 2"
                         },
                          new Publisher()
                         {
                             Name ="Publisher3",
-                            Logo ="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.seroundtable.com%2Fseo-link-building-time-survey-32641.html&psig=AOvVaw0jmQXcqsgvRsrJko2peQe3&ust=1643409264615000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJCSt93-0vUCFQAAAAAdAAAAABAO",
+                            Logo ="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
                             Description ="This is the description of Publisher 3"
                         },
                           new Publisher()
                         {
                             Name ="Publisher4",
-                            Logo ="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.seroundtable.com%2Fseo-link-building-time-survey-32641.html&psig=AOvVaw0jmQXcqsgvRsrJko2peQe3&ust=1643409264615000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJCSt93-0vUCFQAAAAAdAAAAABAO",
+                            Logo ="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
                             Description ="This is the description of Publisher 4"
                         }
                     });

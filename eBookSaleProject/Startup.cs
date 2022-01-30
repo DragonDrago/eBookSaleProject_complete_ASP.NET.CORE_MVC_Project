@@ -57,7 +57,7 @@ namespace eBookSaleProject
             });
             
             //Seed Database
-            AppDbInitializer.Seed(app);
+           // AppDbInitializer.Seed(app);
         }
     }
 }

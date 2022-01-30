@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace eBookSaleProject.Controllers
 {
-    public class ProducerController : Controller
+    public class PublisherController : Controller
     {
         private readonly AppDbContext appDbContext;
 
-        public ProducerController( AppDbContext appDbContext)
+        public PublisherController( AppDbContext appDbContext)
         {
             this.appDbContext = appDbContext;
         }
@@ -18,7 +18,7 @@ namespace eBookSaleProject.Controllers
         public async Task<IActionResult> Index()
         {
             var allPublishers = await appDbContext.Publishers.ToListAsync();
-            return View();
+            return View(allPublishers);
         }
     }
 }
