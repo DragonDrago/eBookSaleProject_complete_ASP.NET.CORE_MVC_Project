@@ -14,20 +14,7 @@ namespace eBookSaleProject.Data
 
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Author_Book>().HasKey(ab => new
-            {
-                ab.BookId,
-                ab.AuthorId
-            });
-
-            modelBuilder.Entity<Author_Book>().HasOne(b => b.Book).WithMany(ab => ab.Author_Books).HasForeignKey(b => b.BookId);
-
-            modelBuilder.Entity<Author_Book>().HasOne(a => a.Author).WithMany(ab => ab.Author_Books).HasForeignKey(a => a.AuthorId);
-
-            base.OnModelCreating(modelBuilder);
-        }
+        
         public DbSet<Author> Authors { get; set; }
         public DbSet<Author_Book> Author_Books { get; set; }
         public DbSet<Book> Books { get; set; }
