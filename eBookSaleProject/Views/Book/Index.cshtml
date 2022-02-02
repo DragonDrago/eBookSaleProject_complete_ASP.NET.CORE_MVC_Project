@@ -13,24 +13,32 @@
                       <div class="card-header text-white bg-info">
                             <p class="card-text">
                                 <h5 class="card-title">
-                                    Book Name Sample
+                                    @item.Name
                                     <a class="text-white float-right"><i class="bi bi-pencil-square"></i></a>
                                 </h5>
                             </p>
                       </div>
                   </div>
                   <div class="col-md-6">
-                    <img src="" width="100%" alt="">
+                    <img src="@item.ImageUrl" width="100%" alt="">
                   </div>
                   <div class="col-md-6">
                       <div class="card-body">
-                            <p class="card-text"> Description Sample</p>
-                            <p class="card-text"> <b>Publisher:</b> Name Sample</p>
-                            <p class="card-text"> <b>Category:</b> Name Sample</p>
-                            <p class="card-text"> <b>Edition Date:</b> Name Sample</p>
+                            <p class="card-text">@item.Description</p>
+                            <p class="card-text"> <b>Publisher:</b> @item.Publisher</p>
+                            <p class="card-text"> <b>Category:</b> @item.BookCategory.ToString()</p>
+                            <p class="card-text"> <b>Edition Date:</b> @item.EdititonDate.ToString()</p>
                             <p class="card-text"> 
                                 <b>Status:</b> 
-                                Status Sample
+                                @if(DateTime.Now-@item.EdititonDate>=TimeSpan.FromDays(3))
+                                {
+                                    <span class="badge bg-success text-white">AVAILABLE</span>
+                                }
+                                else
+                                {
+                                 <span class="badge bg-info text-white">UPCOMING</span>
+
+                                }
                             </p>
                       </div>
                   </div>

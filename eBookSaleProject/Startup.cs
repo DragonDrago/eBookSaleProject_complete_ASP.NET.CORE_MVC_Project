@@ -1,4 +1,5 @@
 using eBookSaleProject.Data;
+using eBookSaleProject.Data.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,6 +28,7 @@ namespace eBookSaleProject
         {
             services.AddDbContext<AppDbContext>(options=>options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllersWithViews();
+            services.AddScoped<IAuthorService, AuthorService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,7 +59,7 @@ namespace eBookSaleProject
             });
             
             //Seed Database
-           // AppDbInitializer.Seed(app);
+            //AppDbInitializer.Seed(app);
         }
     }
 }
