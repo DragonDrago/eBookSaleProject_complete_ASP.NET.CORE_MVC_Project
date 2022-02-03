@@ -20,6 +20,7 @@ namespace eBookSaleProject.Controllers
         {
           var allAuthors = await authorService.GetAllAsync();
           return View(allAuthors);
+        
         }
 
         //Get:  Author/Create
@@ -90,12 +91,14 @@ namespace eBookSaleProject.Controllers
         }
 
         //Post: Author/Edit
+        [HttpPost]
         public async Task<IActionResult> Edit(int id, [Bind("Id,FullName,ProfilePictureURL,Biography")] Author author)
         {
             if (!ModelState.IsValid)
             {
                 return View(author);
             }
+            
             await authorService.UpdateAsync(id, author);
             return RedirectToAction("Index");
         }

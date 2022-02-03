@@ -19,7 +19,7 @@ namespace eBookSaleProject.Data.Base
         public async Task AddAsync(T entity)
         {
            await appDbContext.Set<T>().AddAsync(entity);
-           appDbContext.SaveChanges();
+           await appDbContext.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int id)
@@ -27,6 +27,7 @@ namespace eBookSaleProject.Data.Base
             var entity = await appDbContext.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
             EntityEntry entityEntry = appDbContext.Entry<T>(entity);
             entityEntry.State = EntityState.Deleted;
+            await appDbContext.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
@@ -44,6 +45,7 @@ namespace eBookSaleProject.Data.Base
         {
            EntityEntry entityEntry = appDbContext.Entry<T>(entity);
            entityEntry.State = EntityState.Modified;
+            await appDbContext.SaveChangesAsync();
         }
     }
 }
