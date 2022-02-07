@@ -1,4 +1,5 @@
-﻿using eBookSaleProject.Data.Enum;
+﻿using eBookSaleProject.Data.Base;
+using eBookSaleProject.Data.Enum;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +9,7 @@ using System.Threading;
 
 namespace eBookSaleProject.Models
 {
-    public class Book
+    public class Book:IEntityBase
     {
         [Key]
         public int Id { get; set; }

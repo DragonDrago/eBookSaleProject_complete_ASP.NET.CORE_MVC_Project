@@ -14,7 +14,7 @@
                             <p class="card-text">
                                 <h5 class="card-title">
                                     @item.Name
-                                    <a class="text-white float-right"><i class="bi bi-pencil-square"></i></a>
+                                    <a class="text-white float-right" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
                                 </h5>
                             </p>
                       </div>
@@ -25,14 +25,14 @@
                   <div class="col-md-6">
                       <div class="card-body">
                             <p class="card-text">@item.Description</p>
-                            <p class="card-text"> <b>Publisher:</b> @item.Publisher</p>
+                            <p class="card-text"> <b>Publisher:</b> @item.Publisher.Name</p>
                             <p class="card-text"> <b>Category:</b> @item.BookCategory.ToString()</p>
                             <p class="card-text"> <b>Edition Date:</b> @item.EdititonDate.ToString()</p>
                             <p class="card-text"> 
                                 <b>Status:</b> 
-                                @if(DateTime.Now-@item.EdititonDate>=TimeSpan.FromDays(3))
+                                @if(DateTime.Now-@item.EdititonDate>=TimeSpan.FromDays(200))
                                 {
-                                    <span class="badge bg-success text-white">AVAILABLE</span>
+                                    <span class="badge bg-success text-white">AVAILABLE</span> 
                                 }
                                 else
                                 {
@@ -45,8 +45,10 @@
                   <div class="col-md-12">
                       <div class="card-footer">
                           <p class="card-text">
-                                <a class="btn btn-outline-primary float-rigth"><i class="bi bi-eye-fill"></i>Show Details</a>
-                                <a class="btn btn-success text-white"><i class="bi bi-cart-plus"></i>Add To Cart ($X.XX)</a>
+                                <a class="btn btn-outline-primary float-rigth" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye-fill">
+                                    </i>Show Details
+                                </a>
+                                <a class="btn btn-success text-white"><i class="bi bi-cart-plus"></i>Add To Cart ($ @item.Price)</a>
                           </p>
                       </div>
                   </div>
@@ -55,3 +57,5 @@
       </div>
     }
 </div>
+
+@await Html.PartialAsync("_CreateItem","Book")
