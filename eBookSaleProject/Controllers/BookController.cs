@@ -23,6 +23,20 @@ namespace eBookSaleProject.Controllers
             return View(allBooks);
         }
 
+
+        public async Task<IActionResult> Filter(string searchString)
+        {
+            var allBooks = await bookService.GetAllAsync(n => n.Publisher);
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                var filterResult = allBooks.Where(n=>n.Name.Contains(searchString)||
+                n.Description.Contains(searchString)||n.BookCategory.ToString().Contains(searchString));
+                return View("Index",filterResult);
+            }
+            return View("Index",allBooks);
+        }
+
+
         //Get: Details
         public async Task<IActionResult> Details(int id)
         {

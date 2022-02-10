@@ -32,5 +32,12 @@ namespace eBookSaleProject.Data
         public DbSet<Author_Book> Author_Books { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
+
+        //Order related tables
+
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+
+        public DbSet<ShoppingCartItem> ShoppingCartItems { get; set;}
     }
 }
