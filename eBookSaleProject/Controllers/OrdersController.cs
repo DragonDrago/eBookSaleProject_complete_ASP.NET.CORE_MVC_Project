@@ -13,12 +13,22 @@ namespace eBookSaleProject.Controllers
     {
         private readonly IBookService bookService;
         private readonly ShoppingCart shoppingCart;
+        private readonly IOrdersService ordersService;
 
-        public OrdersController(IBookService bookService, ShoppingCart shoppingCart)
+        public OrdersController(IBookService bookService, ShoppingCart shoppingCart,IOrdersService ordersService)
         {
             this.bookService = bookService;
             this.shoppingCart = shoppingCart;
+            this.ordersService = ordersService;
         }
+
+        public async Task<IActionResult> Index()
+        {
+            string userId = "";
+            var orders = await ordersService.GetOrdersByUserIdAsync(userId);
+            return View(orders);
+        }
+
         public IActionResult ShoppingCart()
         {
             var items = shoppingCart.GetShoppingCartItems();
@@ -49,6 +59,16 @@ namespace eBookSaleProject.Controllers
                 shoppingCart.RemoveItemFromCart(item);
             }
             return RedirectToAction(nameof(ShoppingCart));
+        }
+
+        public async Task<IActionResult> CompleteOrder()
+        {
+            var items = shoppingCart.GetShoppingCartItems();
+            string userId = "";
+            string userEmailAddress = "";
+            await  ordersService.StoreOrderAsync(items, userId, userEmailAddress);
+            await shoppingCart.ClearShoppingCartAsync(); 
+            return View("OrderCompleted");
         }
 
     }

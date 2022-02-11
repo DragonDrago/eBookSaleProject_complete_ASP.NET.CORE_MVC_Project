@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
+
 namespace eBookSaleProject.Data.Cart
 {
     public class ShoppingCart
@@ -85,6 +87,13 @@ namespace eBookSaleProject.Data.Cart
             return total;
         }
 
-       
+        public async Task ClearShoppingCartAsync()
+        {
+            var items = await AppDbContext.ShoppingCartItems.Where(n => n.ShoppingCartId == ShoppingCartId).ToListAsync();
+            AppDbContext.ShoppingCartItems.RemoveRange(items);
+            await AppDbContext.SaveChangesAsync();
+        }
+
+
     }
 }

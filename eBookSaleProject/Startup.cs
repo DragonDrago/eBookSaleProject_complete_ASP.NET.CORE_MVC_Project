@@ -32,6 +32,7 @@ namespace eBookSaleProject
             services.AddScoped<IAuthorService, AuthorService>();
             services.AddScoped<IPublisherService, PublisherService>();
             services.AddScoped<IBookService, BookService>();
+            services.AddScoped<IOrdersService,OrdersService>();
 
             services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
             services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
