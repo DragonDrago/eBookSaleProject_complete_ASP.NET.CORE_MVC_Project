@@ -19,20 +19,25 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                       <li class="nav-item">
-                           <a class="nav-link text-dark" asp-controller="Book" asp-action="Index"><i class="bi bi-book"></i> Books</a>
-                       </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                               <i class="bi bi-gear"></i> Management
-                            </a>
-
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                 <a class="dropdown-item" asp-controller="Author" asp-action="Index"><i class="bi bi-people-fill"></i> Authors</a>
-                                 <a class="dropdown-item" asp-controller="Publisher" asp-action="Index"><i class="bi bi-person-lines-fill"></i> Publishers</a>  
-                            </div>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Book" asp-action="Index"><i class="bi bi-book"></i> Books</a>
                         </li>
+
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="bi bi-gear"></i> Management
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-controller="Author" asp-action="Index"><i class="bi bi-people-fill"></i> Authors</a>
+                                    <a class="dropdown-item" asp-controller="Publisher" asp-action="Index"><i class="bi bi-person-lines-fill"></i> Publishers</a>
+                                </div>
+                            </li>
+                         }
+
+
                     </ul>
 
                     <form class="form-inline my-2 my-lg-0" asp-controller="Book" asp-action="Filter" style="padding-right: 25px;">
@@ -42,20 +47,9 @@
                     <ul class="navbar-nav">
                         @await Component.InvokeAsync("ShoppingCartSummary")
                     </ul>
-                    @*User Profile Section*@
-                    <div class="dropdown">
-                        <button class="btn btn-outline-success dropdown-toggle" type="button" id="profile-btn"
-                        data-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-person-badge"></i> Hello User
-                    </button>
-                        <ul class="dropdown-menu" aria-labelledby="profile-btn">
-                            <li>
-                                <a class="dropdown-item" asp-controller="Orders" asp-action="Index">
-                                    <i class="bi bi-list"></i> Orders
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+
+                    <partial name="_Identity.cshtml"/>
+
                 </div>
             </div>
         </nav>
