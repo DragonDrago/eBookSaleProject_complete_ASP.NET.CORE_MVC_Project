@@ -7,6 +7,8 @@ using eBookSaleProject.Data.Services;
 using eBookSaleProject.Models;
 using Microsoft.AspNetCore.Authorization;
 using eBookSaleProject.Data.Static;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace eBookSaleProject.Controllers
 {
@@ -48,15 +50,22 @@ namespace eBookSaleProject.Controllers
 
         //Post: Create
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Logo,Name,Description")] Publisher publisher)
+        public async Task<IActionResult> Create([Bind("Logo,Name,Description")] Publisher publisher, IFormFile LogoUpload)
         {
             if (!ModelState.IsValid)
             {
                 return View(publisher);
             }
+            using(var stream = new MemoryStream())
+            {
+               await LogoUpload.CopyToAsync(stream);
+               publisher.Logo = stream.ToArray();
+            }
             await publisherService.AddAsync(publisher);
             return RedirectToAction(nameof(Index));
         }
+
+
 
         //Get: Edit
         [HttpGet]
@@ -70,13 +79,33 @@ namespace eBookSaleProject.Controllers
             return View(publisherDetails);
         }
 
+
+        [AllowAnonymous]
+        public async Task<FileResult> LogoImage(int id)
+        {
+
+            Publisher publisher = await publisherService.GetByIdAsync(id);
+            if (publisher != null && publisher.Logo?.Length > 0)
+            {
+                return File(publisher.Logo, "image/jpeg", publisher.Logo + "-" + publisher.Id + ".jpg");
+            }
+            return null;
+        }
+
+
         //Post: Edit
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Logo,Name,Description")] Publisher publisher)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Logo,Name,Description")] Publisher publisher, IFormFile LogoUpload)
         {
+
             if (!ModelState.IsValid)
             {
                 return View(publisher);
+            }
+            using (var stream = new MemoryStream())
+            {
+                await LogoUpload.CopyToAsync(stream);
+                publisher.Logo = stream.ToArray();
             }
             await publisherService.UpdateAsync(id, publisher);
             return RedirectToAction(nameof(Index));

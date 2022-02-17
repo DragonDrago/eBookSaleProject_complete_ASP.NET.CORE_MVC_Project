@@ -12,16 +12,18 @@
         <div class="row">
             <div class="col-md-8 offset-2">
 
-                <form asp-action="Create">
+                <form asp-action="Create" method="post" enctype="multipart/form-data">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group text-center">
                          <img  id ="ProfileLogoPreview" class="img-fluid img-thumbnail" style="max-width:200px; max-height:200px;"  />
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Logo" class="control-label"></label>
-                        <input asp-for="Logo" class="form-control"/>
-                        <span asp-validation-for="Logo" class="text-danger"></span>
-                    </div>
+                     <div class="form-group">
+                          <label asp-for="LogoUpload" class="control-label"></label>
+                              <div class = "custom-file">
+                                 <input  asp-for="LogoUpload" class="form-control" type="file" accept="image/*" />
+                               </div>
+                          <span asp-validation-for="LogoUpload" class="text-danger"></span>
+                     </div>
                     <div class="form-group">
                         <label asp-for="Name" class="control-label"></label>
                         <input asp-for="Name" class="form-control"/>

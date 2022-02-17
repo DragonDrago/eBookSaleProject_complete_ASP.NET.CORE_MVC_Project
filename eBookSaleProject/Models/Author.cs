@@ -1,7 +1,9 @@
 ﻿using eBookSaleProject.Data.Base;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading;
 namespace eBookSaleProject.Models
@@ -9,11 +11,17 @@ namespace eBookSaleProject.Models
     public class Author:IEntityBase
     {
         [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Display(Name = "Profile Picture Url")]
+        [Display(Name = "Profile Picture")]
         [Required(ErrorMessage ="Profile Picture is Required")]
-        public string ProfilePictureURL { get; set; }
+        public byte[] Image { get; set; }
+
+        [NotMapped]
+        [Display(Name = "Profile Picture ")]
+        [Required(ErrorMessage = "Profile Picture is Required")]
+        public IFormFile ImageUpload { get; set; }
 
         [Display(Name = "Full Name")]
         [Required(ErrorMessage = "Full Name is Required")]

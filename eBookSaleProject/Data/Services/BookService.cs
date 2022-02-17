@@ -27,7 +27,7 @@ namespace eBookSaleProject.Data.Services
                 Name = bookViewModel.Name,
                 Description = bookViewModel.Description,
                 Price = bookViewModel.Price,
-                ImageUrl = bookViewModel.ImageUrl,
+                Image = bookViewModel.Image,
                 BookFileUrl = bookViewModel.BookFileUrl,
                 EdititonDate = bookViewModel.EdititonDate,
                 BookCategory = bookViewModel.BookCategory,
@@ -75,7 +75,10 @@ namespace eBookSaleProject.Data.Services
                 dbBook.Name = bookViewModel.Name;
                 dbBook.Description = bookViewModel.Description;
                 dbBook.Price = bookViewModel.Price;
-                dbBook.ImageUrl = bookViewModel.ImageUrl;
+                if (bookViewModel.Image != null)
+                {
+                    dbBook.Image = bookViewModel.Image;
+                }
                 dbBook.BookFileUrl = bookViewModel.BookFileUrl;
                 dbBook.EdititonDate = bookViewModel.EdititonDate;
                 dbBook.BookCategory = bookViewModel.BookCategory;

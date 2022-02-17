@@ -8,7 +8,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>@Html.DisplayNameFor(model=>model.ProfilePictureURL)</th>
+                    <th>@Html.DisplayNameFor(model=>model.Image)</th>
                     <th>@Html.DisplayNameFor(model=>model.FullName)</th>
                     <th>@Html.DisplayNameFor(model=>model.Biography)</th>
                 </tr>
@@ -18,7 +18,7 @@
                 {
                    <tr>
                     <td class="align-middle">
-                        <img class="rounded-circle" src="@item.ProfilePictureURL" alt="@item.FullName" style="max-width:150px" />
+                        <img class="rounded-circle" src="/Author/AuthorImage/@item.Id" alt="@item.FullName" style="max-width:150px" />
                     </td>
                     <td class="align-middle">
                         @Html.DisplayFor(model => item.FullName)

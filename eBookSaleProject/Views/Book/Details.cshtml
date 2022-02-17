@@ -18,7 +18,7 @@
                       </div>
                   </div>
                   <div class="col-md-4">
-                    <img src="@Model.ImageUrl" width="100%" alt="">
+                    <img src="/Book/BookImage/@Model.Id" width="100%" alt="">
                   </div>
                   <div class="col-md-8">
                       <div class="card-body">
@@ -47,7 +47,7 @@
                                 @foreach (var author in Model.Author_Books)
                                 {
                                     <div class="column text-center">
-                                        <img class="border-info rounded-circle" src="@author.Author.ProfilePictureURL" style="max-width:200px"/>
+                                        <img class="border-info rounded-circle" src="/Author/AuthorImage/@author.Author.Id" style="max-width:200px"/>
                                          <br/>
                                         <a asp-controller="Author" asp-action="Details" asp-route-id="@author.AuthorId">@author.Author.FullName</a>
                                     </div>

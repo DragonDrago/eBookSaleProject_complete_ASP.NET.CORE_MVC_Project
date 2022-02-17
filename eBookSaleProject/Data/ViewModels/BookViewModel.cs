@@ -1,5 +1,6 @@
 ﻿using eBookSaleProject.Data.Base;
 using eBookSaleProject.Data.Enum;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -25,9 +26,16 @@ namespace eBookSaleProject.Models
         [Display(Name = "Book Price in $")]
         public double Price { get; set; }
 
+
+        [NotMapped]
+        [Required(ErrorMessage = "Image  is required")]
+        [Display(Name = "Image ")]
+        public IFormFile ImageUpload { get; set; }
+
+
         [Required(ErrorMessage = "Image url is required")]
         [Display(Name = "Image Url path")]
-        public string ImageUrl { get; set; }
+        public byte[] Image { get; set; }
 
         [Required(ErrorMessage = "Book File is required")]
         [Display(Name = "Book file Url path")]

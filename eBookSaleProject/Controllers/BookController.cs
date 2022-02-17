@@ -8,6 +8,8 @@ using eBookSaleProject.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
 using eBookSaleProject.Data.Static;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace eBookSaleProject.Controllers
 {
@@ -61,7 +63,7 @@ namespace eBookSaleProject.Controllers
         //Post: Create
 
         [HttpPost]
-        public async Task<IActionResult> Create(BookViewModel bookViewModel)
+        public async Task<IActionResult> Create(BookViewModel bookViewModel, IFormFile ImageUpload)
         {
             if (!ModelState.IsValid)
             {
@@ -70,7 +72,14 @@ namespace eBookSaleProject.Controllers
                 ViewBag.PublishersList = new SelectList(bookDropDownsData.Publishers, "Id", "Name");
                 return View(bookViewModel);
             }
+            using (var stream = new MemoryStream())
+            {
+                await ImageUpload.CopyToAsync(stream);
+                bookViewModel.Image = stream.ToArray();
+            }
+
             await bookService.AddNewBookAsync(bookViewModel);
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -86,7 +95,7 @@ namespace eBookSaleProject.Controllers
                 Name = bookDetails.Name,
                 Price = bookDetails.Price,
                 Description = bookDetails.Description,
-                ImageUrl = bookDetails.ImageUrl,
+                Image = bookDetails.Image,
                 EdititonDate = bookDetails.EdititonDate,
                 BookFileUrl = bookDetails.BookFileUrl,
                 BookCategory = bookDetails.BookCategory,
@@ -100,10 +109,23 @@ namespace eBookSaleProject.Controllers
         }
 
 
+        [AllowAnonymous]
+        public async Task<FileResult> BookImage(int id)
+        {
+
+            Book book = await bookService.GetBookByIdAsync(id);
+            if (book != null && book.Image?.Length > 0)
+            {
+                return File(book.Image, "image/jpeg", book.Name + "-" + book.Id + ".jpg");
+            }
+            return null;
+        }
+
+
         //Post: Edit
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id,BookViewModel bookViewModel)
+        public async Task<IActionResult> Edit(int id,BookViewModel bookViewModel, IFormFile ImageUpload)
         {
             if(id != bookViewModel.Id)
             {
@@ -115,6 +137,14 @@ namespace eBookSaleProject.Controllers
                 ViewBag.AuthorsList = new SelectList(bookDropDownsData.Authors, "Id", "FullName");
                 ViewBag.PublishersList = new SelectList(bookDropDownsData.Publishers, "Id", "Name");
                 return View(bookViewModel);
+            }
+            if (ImageUpload != null)
+            {
+                using (var stream = new MemoryStream())
+                {
+                    await ImageUpload.CopyToAsync(stream);
+                    bookViewModel.Image = stream.ToArray();
+                }
             }
             await bookService.UpdateBookAsync(bookViewModel);
             return RedirectToAction(nameof(Index));

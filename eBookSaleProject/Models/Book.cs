@@ -1,5 +1,6 @@
 ﻿using eBookSaleProject.Data.Base;
 using eBookSaleProject.Data.Enum;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,6 +13,7 @@ namespace eBookSaleProject.Models
     public class Book:IEntityBase
     {
         [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         public string Name { get; set; }
@@ -20,7 +22,10 @@ namespace eBookSaleProject.Models
 
         public double Price { get; set; }
 
-        public string ImageUrl { get; set; }
+        [NotMapped]
+        public IFormFile ImageUpload { get; set; }
+
+        public byte[] Image { get; set; }
 
         public string BookFileUrl { get; set; }
 

@@ -15,13 +15,9 @@
                 
              
                     <div class="form-group text-center">
-                         <img  id ="ProfilePicturePreview" class=" border-info rounded-circle" style="max-width:200px" />
+                         <img src = "/Author/AuthorImage/@Model.Id" class=" border-info rounded-circle" style="max-width:200px" />
                     </div>
-                    <div class="form-group">
-                        <label asp-for="ProfilePictureURL" class="control-label"></label>
-                        <input asp-for="ProfilePictureURL" class="form-control" readonly />
-                        <span asp-validation-for="ProfilePictureURL" class="text-danger"></span>
-                    </div>
+                    
                     <div class="form-group">
                         <label asp-for="FullName" class="control-label"></label>
                         <input asp-for="FullName" class="form-control" readonly />
@@ -45,13 +41,4 @@
         </div>
     </div>
 </div>
-@section Scripts
-{
-    <script>
-        $(document).ready(function(){
-             var output = document.getElementById('ProfilePicturePreview');
-            output.src = $("#ProfilePictureURL").val();   
-        });
-     
-    </script>
-}
+
