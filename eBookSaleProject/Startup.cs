@@ -81,11 +81,11 @@ namespace eBookSaleProject
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Book}/{action=Index}/{id?}");
             });
             
             //Seed Database
-           AppDbInitializer.Seed(app);
+
            AppDbInitializer.SeedUsersAndRolesAsync(app).Wait();
         }
     }

@@ -1,13 +1,16 @@
 ﻿
 using eBookSaleProject.Data;
 using eBookSaleProject.Data.Services;
+using eBookSaleProject.Data.Static;
 using eBookSaleProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace eBookSaleProject.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class AuthorController : Controller
     {
         private readonly IAuthorService authorService;
@@ -16,6 +19,8 @@ namespace eBookSaleProject.Controllers
         {
             this.authorService = authorService;
         }
+
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
           var allAuthors = await authorService.GetAllAsync();
@@ -30,7 +35,10 @@ namespace eBookSaleProject.Controllers
             return View();
         }
 
+
+
         //Get:Author/Details/new{ id = author.id}
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {

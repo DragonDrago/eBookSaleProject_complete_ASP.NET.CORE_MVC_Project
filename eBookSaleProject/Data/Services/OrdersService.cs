@@ -14,10 +14,14 @@ namespace eBookSaleProject.Data.Services
         {
             this.appDbContext = appDbContext;
         }
-        public async Task<List<Order>> GetOrdersByUserIdAsync(string userId)
+        public async Task<List<Order>> GetOrdersByUserIdAndRoleAsync(string userId,string userRole)
         {
             var orders = await appDbContext.Orders.Include(n => n.OrderItems).ThenInclude(n => n.Book)
-                .Where(n => n.UserId == userId).ToListAsync();
+                .Include(n=>n.User).ToListAsync();
+            if (userRole != "Admin")
+            {
+                orders = orders.Where(x => x.UserId == userId).ToList();
+            }
             return orders;
         }
 

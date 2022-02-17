@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
@@ -8,6 +8,7 @@ using eBookSaleProject.Models;
 using eBookSaleProject.Data;
 using eBookSaleProject.Data.ViewModels;
 using eBookSaleProject.Data.Static;
+using Microsoft.EntityFrameworkCore;
 
 namespace eBookSaleProject.Controllers
 {
@@ -23,6 +24,12 @@ namespace eBookSaleProject.Controllers
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.appDbContext = appDbContext;
+        }
+
+        public async Task<IActionResult> Users()
+        {
+            var users = await appDbContext.Users.ToListAsync();
+            return View(users);
         }
          
         public IActionResult Login()=> View(new LoginViewModel());
@@ -84,6 +91,14 @@ namespace eBookSaleProject.Controllers
             {
                 await userManager.AddToRoleAsync(newUser,UserRoles.User);
             }
+            
+            //When the response sends an error
+            if (newUserResponse.Errors.Count() > 0 )
+            {
+                List<string> errorList = newUserResponse.Errors.Select(x => x.Description).ToList();
+                TempData["Error"] = string.Join("<br/>", errorList);
+                return View(registerViewModel);
+            }
             return View("RegisterCompleted");
         }
 
@@ -92,6 +107,11 @@ namespace eBookSaleProject.Controllers
         {
             await signInManager.SignOutAsync();
             return RedirectToAction("Index","Book");
+        }
+
+        public IActionResult AccessDenied(string ReturnUrl)
+        {
+            return View();
         }
 
     }

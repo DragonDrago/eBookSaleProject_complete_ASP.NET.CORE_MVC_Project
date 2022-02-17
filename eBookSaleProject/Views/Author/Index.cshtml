@@ -16,7 +16,7 @@
             <tbody>
                 @foreach(var item in Model)
                 {
-                <tr>
+                   <tr>
                     <td class="align-middle">
                         <img class="rounded-circle" src="@item.ProfilePictureURL" alt="@item.FullName" style="max-width:150px" />
                     </td>
@@ -34,8 +34,7 @@
                             <a class="btn btn-outline-danger" asp-controller="Author" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i> Delete</a>
                         </td>
                     }
-                    </tr>
-                    }
+                   </tr>
                 }
             </tbody>
         </table>

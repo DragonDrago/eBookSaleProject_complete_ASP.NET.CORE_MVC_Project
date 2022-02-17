@@ -6,9 +6,12 @@ using Microsoft.EntityFrameworkCore;
 using eBookSaleProject.Data.Services;
 using eBookSaleProject.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
+using eBookSaleProject.Data.Static;
 
 namespace eBookSaleProject.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class BookController : Controller
     {
         private readonly IBookService bookService;
@@ -17,13 +20,15 @@ namespace eBookSaleProject.Controllers
         {
             this.bookService = bookService;
         }
+
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var allBooks = await bookService.GetAllAsync(n => n.Publisher);
             return View(allBooks);
         }
 
-
+        [AllowAnonymous]
         public async Task<IActionResult> Filter(string searchString)
         {
             var allBooks = await bookService.GetAllAsync(n => n.Publisher);
@@ -38,6 +43,7 @@ namespace eBookSaleProject.Controllers
 
 
         //Get: Details
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var bookDetails = await bookService.GetBookByIdAsync(id);

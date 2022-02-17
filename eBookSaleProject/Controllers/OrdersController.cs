@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 using eBookSaleProject.Data.Services;
 using eBookSaleProject.Data.Cart;
 using eBookSaleProject.Data.ViewModels;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace eBookSaleProject.Controllers
 {
+    [Authorize]
     public class OrdersController : Controller
     {
         private readonly IBookService bookService;
@@ -24,8 +27,9 @@ namespace eBookSaleProject.Controllers
 
         public async Task<IActionResult> Index()
         {
-            string userId = "";
-            var orders = await ordersService.GetOrdersByUserIdAsync(userId);
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string userRole = User.FindFirstValue(ClaimTypes.Role);
+            var orders = await ordersService.GetOrdersByUserIdAndRoleAsync(userId,userRole);
             return View(orders);
         }
 
@@ -64,8 +68,10 @@ namespace eBookSaleProject.Controllers
         public async Task<IActionResult> CompleteOrder()
         {
             var items = shoppingCart.GetShoppingCartItems();
-            string userId = "";
-            string userEmailAddress = "";
+
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string userEmailAddress = User.FindFirstValue(ClaimTypes.Email);
+
             await  ordersService.StoreOrderAsync(items, userId, userEmailAddress);
             await shoppingCart.ClearShoppingCartAsync(); 
             return View("OrderCompleted");

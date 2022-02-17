@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using eBookSaleProject.Data.Services;
 using eBookSaleProject.Models;
+using Microsoft.AspNetCore.Authorization;
+using eBookSaleProject.Data.Static;
 
 namespace eBookSaleProject.Controllers
 {
+    [Authorize (Roles = UserRoles.Admin)]
     public class PublisherController : Controller
     {
         private readonly IPublisherService publisherService;
@@ -17,6 +20,7 @@ namespace eBookSaleProject.Controllers
             this.publisherService = publisherService;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var allPublishers = await publisherService.GetAllAsync();
@@ -24,7 +28,7 @@ namespace eBookSaleProject.Controllers
         }
 
         //Get: Details
-
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var publisherDetails = await publisherService.GetByIdAsync(id);
