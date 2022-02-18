@@ -14,8 +14,7 @@ namespace eBookSaleProject.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Display(Name = "Profile Picture")]
-        [Required(ErrorMessage ="Profile Picture is Required")]
+        
         public byte[] Image { get; set; }
 
         [NotMapped]

@@ -103,7 +103,7 @@ namespace eBookSaleProject.Controllers
 
         //Post: Author/Create
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("ProfilePictureURL,FullName,Biography")] Author author,IFormFile ImageUpload)
+        public async Task<IActionResult> Create([Bind("ProfilePictureURL,FullName,Biography")] Author author, IFormFile ImageUpload)
         {
             if (!ModelState.IsValid)
             {
@@ -111,10 +111,10 @@ namespace eBookSaleProject.Controllers
             }
             using(var stream =new MemoryStream())
             {
-                await ImageUpload.CopyToAsync(stream);
+               await ImageUpload.CopyToAsync(stream);
                 author.Image = stream.ToArray();
             }
-            await authorService.AddAsync(author);
+            authorService.AddAsync(author);
             return RedirectToAction(nameof(Index));
         }
 

@@ -17,7 +17,7 @@ namespace eBookSaleProject.Data.Base
             this.appDbContext = appDbContext;
         }
 
-        public async Task AddAsync(T entity)
+        public virtual async Task AddAsync(T entity)
         {
            await appDbContext.Set<T>().AddAsync(entity);
            await appDbContext.SaveChangesAsync();

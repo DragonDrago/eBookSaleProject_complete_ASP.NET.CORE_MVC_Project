@@ -44,12 +44,12 @@
                                 <b>Authors: </b>
                                 <hr />
                                 <div class="row">
-                                @foreach (var author in Model.Author_Books)
+                                @foreach (var author_Book in Model.Author_Books)
                                 {
                                     <div class="column text-center">
-                                        <img class="border-info rounded-circle" src="/Author/AuthorImage/@author.Author.Id" style="max-width:200px"/>
+                                        <img class="border-info rounded-circle" src="/Author/AuthorImage/@author_Book.Author.Id" style="max-width:200px"/>
                                          <br/>
-                                        <a asp-controller="Author" asp-action="Details" asp-route-id="@author.AuthorId">@author.Author.FullName</a>
+                                        <a asp-controller="Author" asp-action="Details" asp-route-id="@author_Book.AuthorId">@author_Book.Author.FullName</a>
                                     </div>
                                 }
                             </div>

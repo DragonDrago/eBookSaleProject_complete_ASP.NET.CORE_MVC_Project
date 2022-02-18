@@ -11,7 +11,6 @@ namespace eBookSaleProject.Models
     public class Publisher:IEntityBase
     {
         [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Display(Name ="Logo")]

@@ -10,8 +10,8 @@ using eBookSaleProject.Data;
 namespace eBookSaleProject.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220217192305_NewDbTableChanges")]
-    partial class NewDbTableChanges
+    [Migration("20220218125525_NewMigration")]
+    partial class NewMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -237,7 +237,6 @@ namespace eBookSaleProject.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<byte[]>("Image")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.HasKey("Id");
