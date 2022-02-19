@@ -67,8 +67,8 @@ namespace eBookSaleProject.Data.Cart
                 else
                 {
                     AppDbContext.ShoppingCartItems.Remove(shoppingCartItem);
-                }
             }
+        }
 
             AppDbContext.SaveChanges();
         }

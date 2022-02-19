@@ -14,12 +14,11 @@ namespace eBookSaleProject.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        
+        [Display(Name = "Profile Picture ")]
         public byte[] Image { get; set; }
 
         [NotMapped]
         [Display(Name = "Profile Picture ")]
-        [Required(ErrorMessage = "Profile Picture is Required")]
         public IFormFile ImageUpload { get; set; }
 
         [Display(Name = "Full Name")]

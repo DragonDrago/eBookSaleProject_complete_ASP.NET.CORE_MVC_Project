@@ -44,7 +44,7 @@ namespace eBookSaleProject.Data.Base
             return await query.ToListAsync();
         }
 
-        public async Task<T> GetByIdAsync(int id) => await appDbContext.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
+        public virtual async Task<T> GetByIdAsync(int id) => await appDbContext.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
 
         public async Task<T> GetByIdAsync(int id, params Expression<Func<T, object>>[] includeProperties)
         {
@@ -54,7 +54,7 @@ namespace eBookSaleProject.Data.Base
         }
 
 
-        public  async Task UpdateAsync(int id, T entity)
+        public virtual async Task UpdateAsync( int id,T entity)
         {
            EntityEntry entityEntry = appDbContext.Entry<T>(entity);
            entityEntry.State = EntityState.Modified;

@@ -103,7 +103,7 @@ namespace eBookSaleProject.Controllers
 
         //Post: Author/Create
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("ProfilePictureURL,FullName,Biography")] Author author, IFormFile ImageUpload)
+        public async Task<IActionResult> Create(Author author, IFormFile ImageUpload)
         {
             if (!ModelState.IsValid)
             {
@@ -114,25 +114,26 @@ namespace eBookSaleProject.Controllers
                await ImageUpload.CopyToAsync(stream);
                 author.Image = stream.ToArray();
             }
-            authorService.AddAsync(author);
+            await authorService.AddAsync(author);
             return RedirectToAction(nameof(Index));
         }
 
         //Post: Author/Edit
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FullName,ProfilePictureURL,Biography")] Author author, IFormFile ImageUpload)
+        public async Task<IActionResult> Edit(int id,  Author author, IFormFile ImageUpload)
         {
             if (!ModelState.IsValid)
             {
                 return View(author);
             }
-
-            using (var stream = new MemoryStream())
+            if(ImageUpload != null)
             {
-                await ImageUpload.CopyToAsync(stream);
-                author.Image = stream.ToArray();
+                using (var stream = new MemoryStream())
+                {
+                    await ImageUpload.CopyToAsync(stream);
+                    author.Image = stream.ToArray();
+                }
             }
-
             await authorService.UpdateAsync(id, author);
             return RedirectToAction("Index");
         }

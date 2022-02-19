@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Book>
+@{
+    ViewBag.Title = "List fo Authors";
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        
+        <div class="col-md-4 col-xs-6 border-primary md-3" style="padding:10px">
+            <div class="card mb-3 d-flex flex-column" style="max-width:540px;height:100%;">
+                <div class="card-header text-white bg-info">
+                    <p class="card-text">
+                        <h5 class="card-title">
+                            @item.Name
+                        </h5>
+                    </p>
+                </div>
+                <div class="row g-0">
+                    <div class="col-md-6">
+                        <img src="/Book/BookImage/@item.Id" width="100%" height="100%" alt="">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <p class="card-text">@item.Description</p>
+                            <p class="card-text"> <b>Category:</b> @item.BookCategory.ToString()</p>
+                            <p class="card-text"> <b>Edition Date:</b> @item.EdititonDate.ToString("yyyy MMMM")</p>
+                            <p class="card-text">
+                                <b>Status:</b>
+
+                                <span class="badge bg-success text-white">Purchased!</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer mt-auto">
+                    <p class="card-text text-center">
+                        <a class="btn btn-success text-white" asp-controller="Book" asp-action="BookFile" asp-route-id="@item.Id" target="_blank">
+                            <i class="bi bi-book-half"></i> Read Now
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+
+@await Html.PartialAsync("_CreateItem","Book")

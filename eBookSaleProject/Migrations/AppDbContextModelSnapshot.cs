@@ -267,8 +267,8 @@ namespace eBookSaleProject.Migrations
                     b.Property<int>("BookCategory")
                         .HasColumnType("int");
 
-                    b.Property<string>("BookFileUrl")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("BookFile")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -355,7 +355,6 @@ namespace eBookSaleProject.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Logo")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Name")

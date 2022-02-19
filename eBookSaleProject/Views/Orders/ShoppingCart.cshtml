@@ -41,7 +41,7 @@
                     <td colspan="2"></td>
                     <td><b>Total:</b></td>
                     <td>
-                        @Model.ShoppingCartTotal.ToString("c");
+                        @Model.ShoppingCartTotal.ToString("c")
                     </td>
                     <td></td>
                 </tr>
@@ -49,20 +49,20 @@
         </table>
         <div class="text-center">
             <div class="btn-group">
-              @*  <a class="btn btn-outline-primary" asp-controller="Orders" asp-action="CompleteOrder">
+                <a class="btn btn-outline-primary" asp-controller="Orders" asp-action="CompleteOrder">
                     Complete Order
-                </a>*@
-                <div id="paypal-btn"></div>
+                </a>
+               @* <div id="paypal-btn"></div>*@
                <span style="padding:10px"></span>
                 <a class="btn btn-outline-success" asp-controller="Book" asp-action="Index">
                     Add More Items
                 </a>
-                <a> </a>
+                
             </div>
         </div>
     </div>
 </div>
-@section Scripts
+@*@section Scripts
 {
     <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 
@@ -107,5 +107,5 @@
                });
             }
         },'#paypal-btn');
-    </script>
+    </script>*@
 }

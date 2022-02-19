@@ -27,7 +27,10 @@ namespace eBookSaleProject.Models
 
         public byte[] Image { get; set; }
 
-        public string BookFileUrl { get; set; }
+        [NotMapped]
+        public IFormFile BookFileUpload { get; set; }
+
+        public byte[] BookFile { get; set; }
 
         public DateTime EdititonDate { get; set; }
 

@@ -12,5 +12,7 @@ namespace eBookSaleProject.Data.Services
     {
         Task StoreOrderAsync(List<ShoppingCartItem> items, string userId, string userEmailAddress);
         Task<List<Order>> GetOrdersByUserIdAndRoleAsync(string userId, string userRole);
+
+        Task<List<Book>> GetOrderedBooksByUserIdAndRoleAsync(string userId,string userRole);
     }
 }

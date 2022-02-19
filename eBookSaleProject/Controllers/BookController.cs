@@ -63,7 +63,7 @@ namespace eBookSaleProject.Controllers
         //Post: Create
 
         [HttpPost]
-        public async Task<IActionResult> Create(BookViewModel bookViewModel, IFormFile ImageUpload)
+        public async Task<IActionResult> Create(BookViewModel bookViewModel, IFormFile ImageUpload,IFormFile BookFileUpload)
         {
             if (!ModelState.IsValid)
             {
@@ -72,10 +72,17 @@ namespace eBookSaleProject.Controllers
                 ViewBag.PublishersList = new SelectList(bookDropDownsData.Publishers, "Id", "Name");
                 return View(bookViewModel);
             }
+
             using (var stream = new MemoryStream())
             {
                 await ImageUpload.CopyToAsync(stream);
                 bookViewModel.Image = stream.ToArray();
+            }
+
+            using(var stream = new MemoryStream())
+            {
+                await BookFileUpload.CopyToAsync(stream);
+                bookViewModel.BookFile = stream.ToArray();
             }
 
             await bookService.AddNewBookAsync(bookViewModel);
@@ -88,7 +95,7 @@ namespace eBookSaleProject.Controllers
         {
             var bookDetails = await bookService.GetBookByIdAsync(id);
             if (bookDetails == null) return View("NotFound");
-            
+
             var response = new BookViewModel()
             {
                 Id = bookDetails.Id,
@@ -96,12 +103,13 @@ namespace eBookSaleProject.Controllers
                 Price = bookDetails.Price,
                 Description = bookDetails.Description,
                 Image = bookDetails.Image,
+                BookFile = bookDetails.BookFile,
                 EdititonDate = bookDetails.EdititonDate,
-                BookFileUrl = bookDetails.BookFileUrl,
                 BookCategory = bookDetails.BookCategory,
                 PublisherId = bookDetails.PublisherId,
                 AuthorIds = bookDetails.Author_Books.Select(n => n.AuthorId).ToList(),
             };
+
             var bookDropDownsData = await bookService.GetNewBookDropDownValues();
             ViewBag.AuthorsList = new SelectList(bookDropDownsData.Authors, "Id", "FullName");
             ViewBag.PublishersList = new SelectList(bookDropDownsData.Publishers, "Id", "Name");
@@ -122,10 +130,23 @@ namespace eBookSaleProject.Controllers
         }
 
 
+        [AllowAnonymous]
+        public async Task<FileResult> BookFile(int id)
+        {
+
+            Book book = await bookService.GetBookByIdAsync(id);
+            if (book != null && book.BookFile?.Length > 0)
+            {
+                return File(book.BookFile, "application/pdf", book.BookFile + "-" + book.Id + ".pdf");
+            }
+            return null;
+        }
+
+
         //Post: Edit
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id,BookViewModel bookViewModel, IFormFile ImageUpload)
+        public async Task<IActionResult> Edit(int id,BookViewModel bookViewModel, IFormFile ImageUpload, IFormFile BookFileUpload)
         {
             if(id != bookViewModel.Id)
             {
@@ -146,6 +167,15 @@ namespace eBookSaleProject.Controllers
                     bookViewModel.Image = stream.ToArray();
                 }
             }
+            if(BookFileUpload != null)
+            {
+                using(var stream = new MemoryStream())
+                {
+                    await BookFileUpload.CopyToAsync(stream);
+                    bookViewModel.BookFile = stream.ToArray();
+                }
+            }
+            
             await bookService.UpdateBookAsync(bookViewModel);
             return RedirectToAction(nameof(Index));
         }

@@ -28,18 +28,18 @@ namespace eBookSaleProject.Models
 
 
         [NotMapped]
-        [Required(ErrorMessage = "Image  is required")]
-        [Display(Name = "Image ")]
+        [Display(Name = "Image jpeg")]
         public IFormFile ImageUpload { get; set; }
 
 
-        [Required(ErrorMessage = "Image url is required")]
-        [Display(Name = "Image Url path")]
         public byte[] Image { get; set; }
 
-        [Required(ErrorMessage = "Book File is required")]
-        [Display(Name = "Book file Url path")]
-        public string BookFileUrl { get; set; }
+        [NotMapped]
+        [Display(Name = "Book File (.pdf) ")]
+        public IFormFile BookFileUpload { get; set; }
+
+        public byte[] BookFile { get; set; }
+
 
         [Required(ErrorMessage = "Edition Date is required")]
         [Display(Name = "Book's editon date")]

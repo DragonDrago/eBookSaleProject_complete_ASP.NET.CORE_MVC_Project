@@ -28,7 +28,7 @@ namespace eBookSaleProject.Data.Services
                 Description = bookViewModel.Description,
                 Price = bookViewModel.Price,
                 Image = bookViewModel.Image,
-                BookFileUrl = bookViewModel.BookFileUrl,
+                BookFile = bookViewModel.BookFile,
                 EdititonDate = bookViewModel.EdititonDate,
                 BookCategory = bookViewModel.BookCategory,
                 PublisherId = bookViewModel.PublisherId
@@ -75,20 +75,28 @@ namespace eBookSaleProject.Data.Services
                 dbBook.Name = bookViewModel.Name;
                 dbBook.Description = bookViewModel.Description;
                 dbBook.Price = bookViewModel.Price;
+
                 if (bookViewModel.Image != null)
                 {
                     dbBook.Image = bookViewModel.Image;
                 }
-                dbBook.BookFileUrl = bookViewModel.BookFileUrl;
+
+                if (bookViewModel.BookFile != null)
+                {
+                    dbBook.BookFile = bookViewModel.BookFile;
+                }
+
                 dbBook.EdititonDate = bookViewModel.EdititonDate;
                 dbBook.BookCategory = bookViewModel.BookCategory;
                 dbBook.PublisherId = bookViewModel.PublisherId;
                 await appDbContext.SaveChangesAsync();
             }
+
             //Romve Existing Authors
             var existingAuthorsDb = appDbContext.Author_Books.Where(n=>n.BookId == bookViewModel.Id).ToList();
              appDbContext.Author_Books.RemoveRange(existingAuthorsDb);
             await appDbContext.SaveChangesAsync();
+
             //Add Authors
             foreach (var authorId in bookViewModel.AuthorIds)
             {

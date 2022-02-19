@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eBookSaleProject.Migrations
 {
-    public partial class NewMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -68,7 +68,7 @@ namespace eBookSaleProject.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Logo = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    Logo = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -213,7 +213,7 @@ namespace eBookSaleProject.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<double>(type: "float", nullable: false),
                     Image = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    BookFileUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BookFile = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     EdititonDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     BookCategory = table.Column<int>(type: "int", nullable: false),
                     PublisherId = table.Column<int>(type: "int", nullable: false)

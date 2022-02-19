@@ -33,6 +33,14 @@ namespace eBookSaleProject.Controllers
             return View(orders);
         }
 
+        public async Task<IActionResult> MyBooks()
+        {
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string userRole = User.FindFirstValue(ClaimTypes.Role);
+            var books = await ordersService.GetOrderedBooksByUserIdAndRoleAsync(userId, userRole);
+            return View(books);
+        }
+
         public IActionResult ShoppingCart()
         {
             var items = shoppingCart.GetShoppingCartItems();

@@ -37,6 +37,14 @@ else
                 </a>
             </li>
             }
+            @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
+            {
+                <li>
+                    <a class="dropdown-item" asp-controller="Orders" asp-action="MyBooks">
+                    <i class="bi bi-wallet-fill"></i> Purchased
+                </a>
+            </li>
+            }
         </ul>
     </div>
 

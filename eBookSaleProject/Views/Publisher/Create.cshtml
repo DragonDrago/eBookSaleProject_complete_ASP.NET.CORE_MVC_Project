@@ -50,9 +50,9 @@
     <script>
         $(document).ready(function(){
              var output = document.getElementById('ProfileLogoPreview');
-            output.src = $("#Logo").val();   
+            output.src = $("#LogoUpload").val();   
         });
-        $("#Logo").on("change",function(){
+        $("#LogoUpload").on("change",function(){
             var output = document.getElementById('ProfileLogoPreview');
             output.src = $(this).val();
         });

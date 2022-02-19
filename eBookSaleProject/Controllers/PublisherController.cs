@@ -50,7 +50,7 @@ namespace eBookSaleProject.Controllers
 
         //Post: Create
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Logo,Name,Description")] Publisher publisher, IFormFile LogoUpload)
+        public async Task<IActionResult> Create( Publisher publisher, IFormFile LogoUpload)
         {
             if (!ModelState.IsValid)
             {
@@ -95,7 +95,7 @@ namespace eBookSaleProject.Controllers
 
         //Post: Edit
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Logo,Name,Description")] Publisher publisher, IFormFile LogoUpload)
+        public async Task<IActionResult> Edit(int id, Publisher publisher, IFormFile LogoUpload)
         {
 
             if (!ModelState.IsValid)

@@ -10,8 +10,8 @@ using eBookSaleProject.Data;
 namespace eBookSaleProject.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220218125525_NewMigration")]
-    partial class NewMigration
+    [Migration("20220219083303_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -269,8 +269,8 @@ namespace eBookSaleProject.Migrations
                     b.Property<int>("BookCategory")
                         .HasColumnType("int");
 
-                    b.Property<string>("BookFileUrl")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("BookFile")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -357,7 +357,6 @@ namespace eBookSaleProject.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Logo")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Name")

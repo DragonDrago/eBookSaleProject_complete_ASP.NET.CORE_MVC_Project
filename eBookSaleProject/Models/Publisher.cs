@@ -14,12 +14,10 @@ namespace eBookSaleProject.Models
         public int Id { get; set; }
 
         [Display(Name ="Logo")]
-        [Required(ErrorMessage = "Profile Picture is Required")]
         public byte[] Logo { get; set; }
 
         [NotMapped]
         [Display(Name = "Logo")]
-        [Required(ErrorMessage = "Logo is Required")]
         public IFormFile LogoUpload { get; set; }
 
         [Display(Name = "Name")]

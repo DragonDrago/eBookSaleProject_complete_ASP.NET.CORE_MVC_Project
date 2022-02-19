@@ -39,7 +39,7 @@
                         </ul>
                     </td>
                     <td class="align-middle">
-                        @order.OrderItems.Select(n => n.Book.Price * n.Amount).Sum().ToString("c");
+                        @order.OrderItems.Select(n => n.Book.Price * n.Amount).Sum().ToString("c")
                     </td>
                     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                     {
