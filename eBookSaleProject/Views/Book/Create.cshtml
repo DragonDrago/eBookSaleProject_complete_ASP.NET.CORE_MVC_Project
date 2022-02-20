@@ -1,0 +1,92 @@
+﻿@model BookViewModel
+@using eBookSaleProject.Data.Enum;
+@{
+    ViewBag.Title = "Create New Book";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h4>Create New Book</h4>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Create" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Name" class="control-label"></label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Price" class="control-label"></label>
+                                <input asp-for="Price" type="number" class="form-control-range" min="0" step="0.5"/>
+                                <span asp-validation-for="Price" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ImageUpload" class="control-label"></label>
+                                    <div class = "custom-file">
+                                        <input  asp-for="ImageUpload" class="form-control" type="file" accept="image/*" />
+                                    </div>
+                                <span asp-validation-for="ImageUpload" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="BookFileUpload" class="control-label"></label>
+                                    <div class = "custom-file">
+                                        <input  asp-for="BookFileUpload" class="form-control" type="file"  />
+                                    </div>
+                                <span asp-validation-for="BookFileUpload" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="EdititonDate" class="control-label"></label>
+                                <input asp-for="EdititonDate" type="date" class="form-control"/>
+                                <span asp-validation-for="EdititonDate" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="BookCategory" class="control-label"></label>
+                                <select asp-for="BookCategory" class="form-control" asp-items="Html.GetEnumSelectList<BookCategory>()"></select> 
+                                <span asp-validation-for="BookCategory" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="PublisherId" class="control-label"></label>
+                                <select asp-for="PublisherId" class="form-control" asp-items ="ViewBag.PublishersList"></select> 
+                                <span asp-validation-for="PublisherId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="AuthorIds" class="control-label"></label>
+                                <select asp-for="AuthorIds" class="form-control" asp-items ="ViewBag.AuthorsList" multiple></select>
+                                <span asp-validation-for="AuthorIds" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="Description" class="control-label"></label>
+                                <textarea asp-for="Description" class="form-control"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 offset-4 text-center">
+                        <img width="100%" id="ImageUrlPreview" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-outline-success float-right" />
+                    <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+       $("#ImageUpload").on("change",function(){
+        var output = document.getElementById('ImageUrlPreview');
+        output.src = $(this).val()
+        });
+    </script>
+}

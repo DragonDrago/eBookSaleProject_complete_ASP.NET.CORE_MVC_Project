@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Book>
+﻿
+@model IEnumerable<Book>
 @{
     ViewBag.Title = "List fo Authors";
 }
@@ -6,44 +7,67 @@
 <div class="row">
     @foreach (var item in Model)
     {
-      <div class="col-md-4 col-xs-6 border-primary md-3">
-          <div class="card mb-3" style="max-width:540px;">
-              <div class="row g-0">
-                  <div class="col-md-12">
-                      <div class="card-header text-white bg-info">
+
+        <div class="col-md-4 col-xs-6 border-primary md-3" style="padding:10px">
+            <div class="card mb-3 d-flex flex-column" style="max-width:540px; height:100%;">
+
+                <div class="card-header text-white bg-info">
+                    <p class="card-text">
+                        <h5 class="card-title">
+                            @item.Name
+                            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                            {
+                                <a class="text-white float-right" asp-action="Edit" asp-route-id="@item.Id">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                            }
+                        </h5>
+                    </p>
+                </div>
+
+                <div class="row g-0">
+                    <div class="col-md-6">
+                        <img src="/Book/BookImage/@item.Id" width="100%" height="100%" alt="">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <p class="card-text">@item.Description</p>
+                            <p class="card-text"> <b>Publisher:</b> @item.Publisher.Name</p>
+                            <p class="card-text"> <b>Category:</b> @item.BookCategory.ToString()</p>
+                            <p class="card-text"> <b>Edition Date:</b> @item.EdititonDate.ToString("yyyy MMMM")</p>
                             <p class="card-text">
-                                <h5 class="card-title">
-                                    Book Name Sample
-                                    <a class="text-white float-right"><i class="bi bi-pencil-square"></i></a>
-                                </h5>
+                                <b>Status:</b>
+                                @if (DateTime.Now - @item.EdititonDate >= TimeSpan.FromDays(200))
+                                {
+                                    <span class="badge bg-success text-white">AVAILABLE</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-info text-white">SOON</span>
+                                }
                             </p>
-                      </div>
-                  </div>
-                  <div class="col-md-6">
-                    <img src="" width="100%" alt="">
-                  </div>
-                  <div class="col-md-6">
-                      <div class="card-body">
-                            <p class="card-text"> Description Sample</p>
-                            <p class="card-text"> <b>Publisher:</b> Name Sample</p>
-                            <p class="card-text"> <b>Category:</b> Name Sample</p>
-                            <p class="card-text"> <b>Edition Date:</b> Name Sample</p>
-                            <p class="card-text"> 
-                                <b>Status:</b> 
-                                Status Sample
-                            </p>
-                      </div>
-                  </div>
-                  <div class="col-md-12">
-                      <div class="card-footer">
-                          <p class="card-text">
-                                <a class="btn btn-outline-primary float-rigth"><i class="bi bi-eye-fill"></i>Show Details</a>
-                                <a class="btn btn-success text-white"><i class="bi bi-cart-plus"></i>Add To Cart ($X.XX)</a>
-                          </p>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer mt-auto">
+                    <p class="card-text">
+                        <a class="btn btn-outline-primary float-rigth" asp-action="Details" asp-route-id="@item.Id">
+                            <i class="bi bi-eye-fill">
+                            </i>Show Details
+                        </a>
+                        <a class="btn btn-success text-white @((DateTime.Now - @item.EdititonDate >= TimeSpan.FromDays(200)) ? "":"disabled")"
+                       asp-controller="Orders" asp-action="AddItemToShoppingCart"
+                       asp-route-id="@item.Id">
+                            <i class="bi bi-cart-plus"></i>Add To Cart ($ @item.Price.ToString())
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
     }
 </div>
+
+@await Html.PartialAsync("_Pagination","Book")
+
+@await Html.PartialAsync("_CreateItem","Book")

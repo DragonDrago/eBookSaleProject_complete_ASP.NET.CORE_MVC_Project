@@ -1,0 +1,43 @@
+﻿@using eBookSaleProject.Models.PaginationModel
+@{
+    PaginationModel paginationModel = new PaginationModel();
+    int pageNo = 0;
+    if (ViewBag.PaginationModel != null)
+    {
+        paginationModel = ViewBag.PaginationModel;
+        pageNo = paginationModel.CurrentPage;
+    }
+}
+@model string
+
+<div class="row justify-content-md-center" style="padding-top:10px">
+        @if (paginationModel.TotalPages > 0)
+        {
+            <ul class="pagination justify-content-end">
+                @if (paginationModel.CurrentPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="@Model" asp-action="Index" asp-route="1">First</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="@Model" asp-action="Index" asp-route="@(paginationModel.CurrentPage-1)">Previous</a>
+                    </li>
+                }
+                @for (var pge = paginationModel.StartPage; pge <= paginationModel.EndPage; pge++)
+                {
+                    <li class="page-item @(pge==paginationModel.CurrentPage?"active":"")">
+                        <a class="page-link" asp-controller="@Model" asp-action="Index" asp-route-pg="@pge">@pge</a>
+                    </li>
+                }
+                @if (paginationModel.CurrentPage < paginationModel.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="@Model" asp-action="Index" asp-route="@(paginationModel.CurrentPage+1)">Next</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="@Model" asp-action="Index" asp-route="@(paginationModel.TotalPages)">Last</a>
+                    </li>
+                }
+            </ul>
+        }
+</div>

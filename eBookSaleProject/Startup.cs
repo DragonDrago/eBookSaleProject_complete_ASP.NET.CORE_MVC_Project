@@ -1,7 +1,13 @@
 using eBookSaleProject.Data;
+using eBookSaleProject.Data.Cart;
+using eBookSaleProject.Data.Services;
+using eBookSaleProject.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +32,25 @@ namespace eBookSaleProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(options=>options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IAuthorService, AuthorService>();
+            services.AddScoped<IPublisherService, PublisherService>();
+            services.AddScoped<IBookService, BookService>();
+            services.AddScoped<IOrdersService,OrdersService>();
+
+            services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
+            services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+
+            //Authentication and authorization
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddMemoryCache();
+
+            services.AddSession();
+
+            services.AddAuthentication(options=>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            });
+
             services.AddControllersWithViews();
         }
 
@@ -46,18 +71,22 @@ namespace eBookSaleProject
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
+            //Authentication & Authorization
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Book}/{action=Index}/{id?}");
             });
             
             //Seed Database
-           // AppDbInitializer.Seed(app);
+
+           AppDbInitializer.SeedUsersAndRolesAsync(app).Wait();
         }
     }
 }
