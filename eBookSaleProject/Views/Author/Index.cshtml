@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Author>
+﻿
+@model IEnumerable<Author>
 @{
     ViewBag.Title = "List fo Authors";
 }
@@ -41,6 +42,8 @@
         </table>
     </div>
 </div>
+
+@await Html.PartialAsync("_Pagination","Author")
 
 @await Html.PartialAsync("_CreateItem","Author")
 

@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using eBookSaleProject.Data.Static;
 using System.IO;
 using Microsoft.AspNetCore.Http;
+using eBookSaleProject.Models.PaginationModel;
 
 namespace eBookSaleProject.Controllers
 {
@@ -24,10 +25,26 @@ namespace eBookSaleProject.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pg = 1)
         {
             var allBooks = await bookService.GetAllAsync(n => n.Publisher);
-            return View(allBooks);
+
+            const int pageSize = 9;
+            if(pg < 1)
+            {
+                pg = 1;
+            }
+
+            int rescCount = allBooks.Count();
+
+            var paginationModel = new PaginationModel(rescCount, pg, pageSize);
+
+            int rescSkip = (pg - 1) * pageSize;
+
+            var data = allBooks.Skip(rescSkip).Take(paginationModel.PageSize).ToArray();
+            this.ViewBag.PaginationModel = paginationModel;
+            //return View(allBooks);
+            return View(data);
         }
 
         [AllowAnonymous]
@@ -59,6 +76,19 @@ namespace eBookSaleProject.Controllers
             ViewBag.AuthorsList = new SelectList(bookDropDownsData.Authors, "Id", "FullName");
             ViewBag.PublishersList = new SelectList(bookDropDownsData.Publishers, "Id", "Name");
             return View();
+        }
+
+        //Post: Delete 
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var book = await bookService.GetBookByIdAsync(id);
+            if(book == null)
+            {
+                return View(nameof(NotFound));
+            }
+            await bookService.DeleteAsync(id);
+            return RedirectToAction("Index");
         }
 
         //Post: Create

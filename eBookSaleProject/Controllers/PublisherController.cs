@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using eBookSaleProject.Data.Static;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using eBookSaleProject.Models.PaginationModel;
 
 namespace eBookSaleProject.Controllers
 {
@@ -23,10 +24,26 @@ namespace eBookSaleProject.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pg = 1)
         {
             var allPublishers = await publisherService.GetAllAsync();
-            return View(allPublishers);
+            const int pageSize = 9;
+            if (pg < 1)
+            {
+                pg = 1;
+            }
+
+            int rescCount = allPublishers.Count();
+
+            var paginationModel = new PaginationModel(rescCount, pg, pageSize);
+
+            int rescSkip = (pg - 1) * pageSize;
+
+            var data = allPublishers.Skip(rescSkip).Take(paginationModel.PageSize).ToArray();
+            this.ViewBag.PaginationModel = paginationModel;
+           
+            return View(data);
+           // return View(allPublishers);
         }
 
         //Get: Details

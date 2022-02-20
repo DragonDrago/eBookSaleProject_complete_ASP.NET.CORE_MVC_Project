@@ -3,6 +3,7 @@ using eBookSaleProject.Data;
 using eBookSaleProject.Data.Services;
 using eBookSaleProject.Data.Static;
 using eBookSaleProject.Models;
+using eBookSaleProject.Models.PaginationModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,11 +24,27 @@ namespace eBookSaleProject.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pg = 1)
         {
           var allAuthors = await authorService.GetAllAsync();
-          return View(allAuthors);
-        
+            const int pageSize = 9;
+            if (pg < 1)
+            {
+                pg = 1;
+            }
+
+            int rescCount = allAuthors.Count();
+
+            var paginationModel = new PaginationModel(rescCount, pg, pageSize);
+
+            int rescSkip = (pg - 1) * pageSize;
+
+            var data = allAuthors.Skip(rescSkip).Take(paginationModel.PageSize).ToArray();
+            this.ViewBag.PaginationModel = paginationModel;
+
+            return View(data);
+            //return View(allAuthors);
+
         }
 
 
