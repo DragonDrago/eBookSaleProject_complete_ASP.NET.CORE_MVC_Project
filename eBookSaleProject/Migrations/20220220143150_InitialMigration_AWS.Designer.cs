@@ -10,8 +10,8 @@ using eBookSaleProject.Data;
 namespace eBookSaleProject.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220219083303_Initial")]
-    partial class Initial
+    [Migration("20220220143150_InitialMigration_AWS")]
+    partial class InitialMigration_AWS
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eBookSaleProject.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialMigration_AWS : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
