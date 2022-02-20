@@ -81,7 +81,8 @@ namespace eBookSaleProject.Controllers
             string userEmailAddress = User.FindFirstValue(ClaimTypes.Email);
 
             await  ordersService.StoreOrderAsync(items, userId, userEmailAddress);
-            await shoppingCart.ClearShoppingCartAsync(); 
+            await shoppingCart.ClearShoppingCartAsync();
+            shoppingCart.ShoppingCartItems = null;
             return View("OrderCompleted");
         }
 

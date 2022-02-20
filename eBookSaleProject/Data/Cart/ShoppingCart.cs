@@ -17,7 +17,7 @@ namespace eBookSaleProject.Data.Cart
         public AppDbContext AppDbContext { get; set; }
 
         public string ShoppingCartId { get; set; }
-        public List<ShoppingCartItem> ShoppingCartItems { get; set; }   
+        public List<ShoppingCartItem> ShoppingCartItems { get; set; }
         public ShoppingCart(AppDbContext appDbContext)
         {
             AppDbContext = appDbContext;
@@ -25,19 +25,19 @@ namespace eBookSaleProject.Data.Cart
 
         public static ShoppingCart GetShoppingCart(IServiceProvider serviceProvider)
         {
-            ISession session = serviceProvider.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session; 
+            ISession session = serviceProvider.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
             var context = serviceProvider.GetService<AppDbContext>();
 
-            string cartId = session.GetString("CartId")??Guid.NewGuid().ToString();
-            session.SetString("CartId",cartId);
-             return new ShoppingCart(context) { ShoppingCartId = cartId };
+            string cartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
+            session.SetString("CartId", cartId);
+            return new ShoppingCart(context) { ShoppingCartId = cartId };
         }
 
         public void AddItemToCart(Book book)
         {
             var shoppingCartItem = AppDbContext.ShoppingCartItems.FirstOrDefault(n => n.Book.Id == book.Id
             && n.ShoppingCartId == ShoppingCartId);
-            if(shoppingCartItem == null)
+            if (shoppingCartItem == null)
             {
                 shoppingCartItem = new ShoppingCartItem()
                 {
@@ -54,11 +54,11 @@ namespace eBookSaleProject.Data.Cart
             AppDbContext.SaveChanges();
         }
 
-        public void RemoveItemFromCart(Book book)      
+        public void RemoveItemFromCart(Book book)
         {
             var shoppingCartItem = AppDbContext.ShoppingCartItems.FirstOrDefault(n => n.Book.Id == book.Id
            && n.ShoppingCartId == ShoppingCartId);
-            if(shoppingCartItem != null)
+            if (shoppingCartItem != null)
             {
                 if (shoppingCartItem.Amount > 1)
                 {
@@ -67,18 +67,18 @@ namespace eBookSaleProject.Data.Cart
                 else
                 {
                     AppDbContext.ShoppingCartItems.Remove(shoppingCartItem);
+                }
             }
-        }
 
             AppDbContext.SaveChanges();
         }
 
         public List<ShoppingCartItem> GetShoppingCartItems()
         {
-            return ShoppingCartItems ?? (ShoppingCartItems = AppDbContext.ShoppingCartItems.Where(n=>n.ShoppingCartId==ShoppingCartId)
-                .Include(n=>n.Book).ToList());
+            return ShoppingCartItems ?? (ShoppingCartItems = AppDbContext.ShoppingCartItems.Where(n => n.ShoppingCartId == ShoppingCartId)
+                .Include(n => n.Book).ToList());
         }
-        
+
         public double GetShoppingCartTotal()
         {
             var total = AppDbContext.ShoppingCartItems.

@@ -36,8 +36,9 @@ namespace eBookSaleProject.Controllers
             var allBooks = await bookService.GetAllAsync(n => n.Publisher);
             if (!string.IsNullOrEmpty(searchString))
             {
-                var filterResult = allBooks.Where(n=>n.Name.Contains(searchString)||
-                n.Description.Contains(searchString)||n.BookCategory.ToString().Contains(searchString));
+                var filterResult = allBooks.Where(n=>n.Name.ToLower().Contains(searchString.ToLower())||
+                n.Description.ToLower().Contains(searchString.ToLower() )
+                ||n.BookCategory.ToString().ToLower().Contains(searchString.ToLower()));
                 return View("Index",filterResult);
             }
             return View("Index",allBooks);

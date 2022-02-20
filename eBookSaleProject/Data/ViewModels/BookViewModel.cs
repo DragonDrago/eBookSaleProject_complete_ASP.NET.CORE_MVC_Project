@@ -5,8 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using eBookSaleProject.Attributes;
 using System.Linq;
 using System.Threading;
+using System;
 
 namespace eBookSaleProject.Models
 {
@@ -29,6 +31,7 @@ namespace eBookSaleProject.Models
 
         [NotMapped]
         [Display(Name = "Image jpeg")]
+        [AllowedExtensionAttributes(new string[] { ".jpg", ".png" })]
         public IFormFile ImageUpload { get; set; }
 
 
@@ -36,6 +39,7 @@ namespace eBookSaleProject.Models
 
         [NotMapped]
         [Display(Name = "Book File (.pdf) ")]
+        [AllowedExtensionAttributes(new string[] { ".pdf" })]
         public IFormFile BookFileUpload { get; set; }
 
         public byte[] BookFile { get; set; }
